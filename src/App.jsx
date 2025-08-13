@@ -10,6 +10,7 @@ import ForWho from './components/ForWho'
 import KeyQuestions from './components/KeyQuestions'
 import MiniDemo from './components/MiniDemo'
 import Team from './components/Team'
+import FAQ from './components/FAQ'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 
@@ -50,6 +51,7 @@ function App() {
         <KeyQuestions />
         <MiniDemo />
         <Team />
+        <FAQ />
         <CTA />
       </main>
       <Footer />

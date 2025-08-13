@@ -70,7 +70,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0"
             >
-              Menús QR interactivos, pedidos instantáneos y sistema de reservas, todo en una sola plataforma moderna y eficiente.
+              Transforma tu restaurante con menús digitales, pedidos directos y gestión eficiente. Una plataforma completa diseñada para facilitar tu operación diaria.
             </motion.p>
 
             {/* CTAs */}
@@ -87,7 +87,7 @@ const Hero = () => {
                 whileTap={{ scale: 0.98 }}
               >
                 <Play className="h-5 w-5" />
-                Ver Demo
+                Ver Demo de 2 Minutos
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </motion.button>
 
@@ -97,7 +97,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Explorar Características
+                Conocer Funcionalidades
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </motion.button>
             </motion.div>

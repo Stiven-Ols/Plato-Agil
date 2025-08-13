@@ -5,18 +5,45 @@ import { Mail, Phone, ArrowRight, CheckCircle } from 'lucide-react'
 const CTA = () => {
   const [email, setEmail] = useState('')
   const [restaurant, setRestaurant] = useState('')
+  const [phone, setPhone] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [errors, setErrors] = useState({})
+
+  const validateForm = () => {
+    const newErrors = {}
+    
+    if (!restaurant.trim()) {
+      newErrors.restaurant = 'El nombre del restaurante es requerido'
+    }
+    
+    if (!email.trim()) {
+      newErrors.email = 'El email es requerido'
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Ingresa un email válido'
+    }
+    
+    if (phone && !/^\+?[\d\s\-\(\)]+$/.test(phone)) {
+      newErrors.phone = 'Ingresa un teléfono válido'
+    }
+    
+    return newErrors
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (email && restaurant) {
-      // Aquí iría la lógica para enviar el formulario
+    const newErrors = validateForm()
+    
+    if (Object.keys(newErrors).length === 0) {
       setIsSubmitted(true)
       setTimeout(() => {
         setIsSubmitted(false)
         setEmail('')
         setRestaurant('')
-      }, 3000)
+        setPhone('')
+        setErrors({})
+      }, 4000)
+    } else {
+      setErrors(newErrors)
     }
   }
 
@@ -33,10 +60,10 @@ const CTA = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              ¿Listo para <span className="text-gradient">transformar</span> tu restaurante?
+              Comienza la <span className="text-gradient">digitalización</span> de tu restaurante
             </h2>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-              Solicita una demo personalizada y descubre cómo PlatoAgíl puede revolucionar tu negocio gastronómico.
+              Agenda una demo personalizada sin compromiso. Te mostramos cómo PlatoAgíl se adapta a las necesidades específicas de tu restaurante.
             </p>
           </motion.div>
 
@@ -65,19 +92,19 @@ const CTA = () => {
                   <div className="space-y-4 mb-8">
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="h-5 w-5 text-orange-400 flex-shrink-0" />
-                      <span className="text-slate-300">Demo personalizada de 30 minutos</span>
+                      <span className="text-slate-300">Demo personalizada adaptada a tu menú</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="h-5 w-5 text-orange-400 flex-shrink-0" />
-                      <span className="text-slate-300">Consultoría gratuita de implementación</span>
+                      <span className="text-slate-300">Configuración inicial sin costo</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="h-5 w-5 text-orange-400 flex-shrink-0" />
-                      <span className="text-slate-300">Soporte técnico especializado</span>
+                      <span className="text-slate-300">Capacitación incluida para tu equipo</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="h-5 w-5 text-orange-400 flex-shrink-0" />
-                      <span className="text-slate-300">Sin compromisos ni costos iniciales</span>
+                      <span className="text-slate-300">Soporte técnico en español</span>
                     </div>
                   </div>
 
@@ -119,11 +146,23 @@ const CTA = () => {
                           type="text"
                           id="restaurant"
                           value={restaurant}
-                          onChange={(e) => setRestaurant(e.target.value)}
-                          className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                          onChange={(e) => {
+                            setRestaurant(e.target.value)
+                            if (errors.restaurant) {
+                              setErrors(prev => ({...prev, restaurant: null}))
+                            }
+                          }}
+                          className={`w-full px-4 py-3 bg-slate-800/50 border rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 ${
+                            errors.restaurant 
+                              ? 'border-red-500 focus:ring-red-500' 
+                              : 'border-slate-600 focus:ring-orange-500'
+                          }`}
                           placeholder="Ej: Restaurante El Buen Sabor"
                           required
                         />
+                        {errors.restaurant && (
+                          <p className="text-red-400 text-xs mt-1">{errors.restaurant}</p>
+                        )}
                       </div>
 
                       <div>
@@ -134,11 +173,49 @@ const CTA = () => {
                           type="email"
                           id="email"
                           value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                          onChange={(e) => {
+                            setEmail(e.target.value)
+                            if (errors.email) {
+                              setErrors(prev => ({...prev, email: null}))
+                            }
+                          }}
+                          className={`w-full px-4 py-3 bg-slate-800/50 border rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 ${
+                            errors.email 
+                              ? 'border-red-500 focus:ring-red-500' 
+                              : 'border-slate-600 focus:ring-orange-500'
+                          }`}
                           placeholder="tu@email.com"
                           required
                         />
+                        {errors.email && (
+                          <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2">
+                          Teléfono (Opcional)
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          value={phone}
+                          onChange={(e) => {
+                            setPhone(e.target.value)
+                            if (errors.phone) {
+                              setErrors(prev => ({...prev, phone: null}))
+                            }
+                          }}
+                          className={`w-full px-4 py-3 bg-slate-800/50 border rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 ${
+                            errors.phone 
+                              ? 'border-red-500 focus:ring-red-500' 
+                              : 'border-slate-600 focus:ring-orange-500'
+                          }`}
+                          placeholder="+57 300 123 4567"
+                        />
+                        {errors.phone && (
+                          <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
+                        )}
                       </div>
 
                       <motion.button
@@ -148,12 +225,12 @@ const CTA = () => {
                         whileTap={{ scale: 0.98 }}
                         disabled={!email || !restaurant}
                       >
-                        Solicitar Demo Gratuita
+                        Solicitar Demo Personalizada
                         <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
                       </motion.button>
 
                       <p className="text-xs text-slate-400 text-center">
-                        Al solicitar la demo, aceptas que nos pongamos en contacto contigo para coordinar la presentación.
+                        Te contactaremos en menos de 24 horas para agendar una demo adaptada a tu restaurante.
                       </p>
                     </motion.form>
                   ) : (
