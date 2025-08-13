@@ -1,18 +1,18 @@
-# 🍽️ PlatoAgíl - Landing Page
+# PlatoAgil - Landing Page
 
 Una landing page moderna y responsive para PlatoAgíl, la solución web integral para restaurantes con menús QR, pedidos directos y sistema de reservas.
 
-## 🌐 Demo en Vivo
+## Demo en Vivo
 
 **[Ver PlatoAgíl en GitHub Pages](https://stiven-ols.github.io/Plato-Agil/)**
 
-## 📋 Descripción del Proyecto
+## Descripción del Proyecto
 
 PlatoAgíl es una plataforma digital diseñada para revolucionar la experiencia gastronómica mediante la digitalización completa de la operación de restaurantes. Esta landing page presenta todas las características y beneficios del sistema.
 
-## 🚀 Características
+## Características
 
-- **Diseño Moderno**: Estilo oscuro elegante con acentos en emerald y cyan
+- **Diseño Moderno**: Estilo oscuro elegante con paleta de colores gastronómica
 - **Totalmente Responsive**: Optimizado para móvil, tablet y desktop
 - **Animaciones Suaves**: Implementado con Framer Motion y Lenis smooth scrolling
 - **SEO Optimizado**: Meta tags y estructura semántica
