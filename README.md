@@ -143,7 +143,7 @@ Para desplegar en producción:
 
 - **Email**: contacto@platoagil.com
 - **Teléfono**: +57 300 123 4567
-- **Ubicación**: Medellín, Colombia
+- **Ubicación**: Cali, Colombia
 
 ---
 
